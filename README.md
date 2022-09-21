@@ -2,7 +2,7 @@
 
 An addon including a class that provides various functions that go beyond randf() and randi() to provide various kinds of RNG.
 
-The highlight is the Dynamic Wheel of Fortune, introducing weighted randomness with weights calculated based on the contents of a collection: requirements, limits, buffs and . This is perfect for games presenting a selection of random upgrades which may require other upgrades to provide any use. The `DynamicWheelItem` allows defining the item's weights, categories/tags, conditional weight bonuses and count limits.
+The highlight is the Dynamic Wheel of Fortune, introducing weighted randomness with weights calculated based on the contents of a collection: requirements, limits and buffs. This is perfect for games presenting a selection of random upgrades which may require other upgrades to provide any use. The `DynamicWheelItem` allows defining the item's weights, categories/tags, conditional weight bonuses and count limits.
 
 Includes classes (each instantiated through `Class.new()` unless a Resource):
 - `FortuneWheel`, a class providing the above described feature as well as simple weighted RNG;
