@@ -12,3 +12,7 @@ func _on_Button2_pressed():
 
 func _on_Button_pressed():
 	get_tree().change_scene("res://example/dynamic_wheel/upgrades.tscn")
+
+
+func _on_Button4_pressed():
+	get_tree().change_scene("res://example/fairng/fairng_test.tscn")

@@ -1,0 +1,194 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://example/example_navigation.tscn" type="PackedScene" id=1]
+[ext_resource path="res://example/fairng/fairng_test.gd" type="Script" id=2]
+
+[sub_resource type="Gradient" id=2]
+offsets = PoolRealArray( 0, 0.238318, 0.317757, 0.616822, 0.901869 )
+colors = PoolColorArray( 0.4, 0.501961, 1, 0.513726, 0.4, 0.501961, 1, 0.290196, 0.4, 0.501961, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0.678431 )
+
+[sub_resource type="GradientTexture2D" id=1]
+gradient = SubResource( 2 )
+fill_from = Vector2( 0.00972222, 0.00416667 )
+fill_to = Vector2( 0.198611, 1 )
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Navigation" parent="." instance=ExtResource( 1 )]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="LinePanel" type="Panel" parent="."]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 105.0
+margin_top = -492.0
+margin_right = 571.0
+margin_bottom = -138.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Line2D" type="Line2D" parent="LinePanel"]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -420.0
+margin_top = 120.0
+margin_right = -86.0
+margin_bottom = -138.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+freq_table_height = 12
+
+[node name="Label3" type="Label" parent="VBoxContainer"]
+margin_right = 334.0
+margin_bottom = 14.0
+text = "Distribution: (red = far from max value = bad)"
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Label2" type="Label" parent="VBoxContainer"]
+margin_top = 18.0
+margin_right = 334.0
+margin_bottom = 32.0
+size_flags_vertical = 2
+
+[node name="LinePanel" type="Panel" parent="VBoxContainer/Label2"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 87.0
+
+[node name="Line2D" type="Line2D" parent="VBoxContainer/Label2/LinePanel"]
+default_color = Color( 0.4, 0.501961, 1, 1 )
+
+[node name="Line2D2" type="Line2D" parent="VBoxContainer/Label2/LinePanel"]
+default_color = Color( 0.4, 0.501961, 1, 0.470588 )
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/Label2/LinePanel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = SubResource( 1 )
+expand = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 290.0
+margin_right = 334.0
+margin_bottom = 314.0
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer"]
+margin_top = 5.0
+margin_right = 72.0
+margin_bottom = 19.0
+text = "Roll count: "
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="LineEdit" type="SpinBox" parent="VBoxContainer/HBoxContainer"]
+margin_left = 76.0
+margin_right = 203.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+min_value = 5.0
+max_value = 10000.0
+value = 50.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Button" type="Button" parent="VBoxContainer/HBoxContainer"]
+margin_left = 207.0
+margin_right = 334.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+text = "Roll!!!"
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 318.0
+margin_right = 334.0
+margin_bottom = 342.0
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer2"]
+margin_top = 5.0
+margin_right = 59.0
+margin_bottom = 19.0
+text = "Precision"
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Prec" type="SpinBox" parent="VBoxContainer/HBoxContainer2"]
+margin_left = 63.0
+margin_right = 200.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+min_value = 2.0
+max_value = 10000.0
+value = 12.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CheckBox" type="CheckBox" parent="VBoxContainer/HBoxContainer2"]
+margin_left = 204.0
+margin_right = 334.0
+margin_bottom = 24.0
+text = "Use FairNG [tm]"
+
+[node name="Info" type="Button" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -116.0
+margin_top = -82.0
+margin_right = 127.0
+margin_bottom = -62.0
+text = "Info"
+
+[node name="AcceptDialog" type="AcceptDialog" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -183.0
+margin_top = -134.0
+margin_right = 348.0
+margin_bottom = 111.0
+window_title = "Info"
+dialog_text = "This random number generator tries to generate numbers that are distributed as evenly as possible.
+Once a number appears, it won't drop again until all other numbers have dropped.
+
+Try:
+- Comparing the FairNG[tm] with a standard RandomNumberGenerator. Look at the result distribution graph. If too much of the line is in the red, many values don't drop nearly as often.
+- Changing Precision. Look at how the distribution graph changes. 
+- Changing Repeats. If Presicion are exactly 12 (as many as the number of samples for the text field and result distribution graph), each value is guaranteed once."
+dialog_autowrap = true
+
+[node name="Label" type="Label" parent="."]
+margin_right = 40.0
+margin_bottom = 14.0
+
+[connection signal="value_changed" from="VBoxContainer/HBoxContainer/LineEdit" to="VBoxContainer" method="_on_Repeats_value_changed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/Button" to="VBoxContainer" method="_on_Button_pressed"]
+[connection signal="value_changed" from="VBoxContainer/HBoxContainer2/Prec" to="VBoxContainer" method="_on_Prec_value_changed"]
+[connection signal="toggled" from="VBoxContainer/HBoxContainer2/CheckBox" to="VBoxContainer" method="_on_CheckBox_toggled"]
+[connection signal="pressed" from="Info" to="AcceptDialog" method="popup_centered"]

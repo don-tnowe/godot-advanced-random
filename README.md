@@ -6,6 +6,7 @@ The highlight is the Dynamic Wheel of Fortune, introducing weighted randomness w
 
 Includes classes (each instantiated through `Class.new()` unless a Resource):
 - `FortuneWheel`, a class providing the above described feature as well as simple weighted RNG;
+- `FairNG`, a random number generator distributing numbers more evenly so things feel more "Fair" for the player;
 - `DiceArray`, a class taking several of an `AdvancedDie` Resource to roll them and tally up the symbols that were rolled (as in the game [Circadian Dice](https://store.steampowered.com/app/1893620/Circadian_Dice/) or whatever has different symbols on one die face);
 - `CardDeck`, a class that emulates drawing from a pile of cards. Implementation close to [Slay the Spire](https://store.steampowered.com/app/646570/Slay_the_Spire/) - when you draw from `PILE_DRAW`, cards go to `PILE_IN_PLAY` until you move them to `PILE_DISCARD`. More custom piles can be added and existing ones reconfigured.
 

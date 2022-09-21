@@ -30,6 +30,11 @@ _global_script_classes=[ {
 "path": "res://addons/advanced_random/dynamic_wheel_item.gd"
 }, {
 "base": "Reference",
+"class": "FairNG",
+"language": "GDScript",
+"path": "res://addons/advanced_random/fairng.gd"
+}, {
+"base": "Reference",
 "class": "FortuneWheel",
 "language": "GDScript",
 "path": "res://addons/advanced_random/fortune_wheel.gd"
@@ -39,12 +44,13 @@ _global_script_class_icons={
 "CardDeck": "",
 "DiceArray": "",
 "DynamicWheelItem": "",
+"FairNG": "",
 "FortuneWheel": ""
 }
 
 [application]
 
-run/main_scene="res://example/dynamic_wheel/upgrades.tscn"
+run/main_scene="res://example/fairng/fairng_test.tscn"
 config/icon="res://example/icon.png"
 
 [rendering]
