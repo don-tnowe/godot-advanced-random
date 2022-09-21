@@ -1,0 +1,177 @@
+[gd_scene load_steps=19 format=2]
+
+[ext_resource path="res://example/dynamic_wheel/upgrades/up_magic.tres" type="Resource" id=1]
+[ext_resource path="res://example/dynamic_wheel/upgrades/weapon_fireball.tres" type="Resource" id=2]
+[ext_resource path="res://example/dynamic_wheel/upgrades/up_strength.tres" type="Resource" id=3]
+[ext_resource path="res://example/dynamic_wheel/upgrades/weapon_giga_sword.tres" type="Resource" id=4]
+[ext_resource path="res://example/dynamic_wheel/upgrades/mastery strength.tres" type="Resource" id=5]
+[ext_resource path="res://example/dynamic_wheel/upgrades/weapon_lightning.tres" type="Resource" id=6]
+[ext_resource path="res://example/dynamic_wheel/upgrades/weapon_spear.tres" type="Resource" id=7]
+[ext_resource path="res://example/dynamic_wheel/upgrades/elemental.tres" type="Resource" id=8]
+[ext_resource path="res://example/dynamic_wheel/upgrades/weapon_chaos_blast.tres" type="Resource" id=9]
+[ext_resource path="res://example/dynamic_wheel/upgrades/weapon_dagger.tres" type="Resource" id=10]
+[ext_resource path="res://example/dynamic_wheel/upgrades/ice_and_fire.tres" type="Resource" id=11]
+[ext_resource path="res://example/dynamic_wheel/upgrades/up_aoe.tres" type="Resource" id=12]
+[ext_resource path="res://example/dynamic_wheel/upgrades/health.tres" type="Resource" id=13]
+[ext_resource path="res://example/dynamic_wheel/upgrades/weapon_axe.tres" type="Resource" id=14]
+[ext_resource path="res://example/dynamic_wheel/upgrades/weapon_blizzard.tres" type="Resource" id=15]
+[ext_resource path="res://example/dynamic_wheel/upgrades/mastery magic.tres" type="Resource" id=16]
+[ext_resource path="res://example/dynamic_wheel/upgrades.gd" type="Script" id=17]
+[ext_resource path="res://example/example_navigation.tscn" type="PackedScene" id=18]
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="1" type="Button" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -393.5
+margin_top = -75.45
+margin_right = -150.5
+margin_bottom = -55.45
+text = "Item 2"
+
+[node name="2" type="Button" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -122.5
+margin_top = -75.45
+margin_right = 120.5
+margin_bottom = -55.45
+text = "Item 2"
+
+[node name="3" type="Button" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = 146.5
+margin_top = -75.45
+margin_right = 389.5
+margin_bottom = -55.45
+text = "Item 2"
+
+[node name="Info" type="Button" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = 16.0
+margin_top = -43.0001
+margin_right = 259.0
+margin_bottom = -23.0001
+text = "Info"
+
+[node name="Reset" type="Button" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -251.0
+margin_top = -43.0001
+margin_right = -8.0
+margin_bottom = -23.0001
+text = "Reset"
+
+[node name="Label" type="Label" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 295.0
+margin_top = 18.0
+margin_right = -537.0
+margin_bottom = -138.0
+valign = 2
+script = ExtResource( 17 )
+items_available = [ ExtResource( 8 ), ExtResource( 13 ), ExtResource( 11 ), ExtResource( 16 ), ExtResource( 5 ), ExtResource( 12 ), ExtResource( 1 ), ExtResource( 3 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 2 ), ExtResource( 4 ), ExtResource( 6 ), ExtResource( 7 ) ]
+
+[node name="Panel" type="Panel" parent="Label"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -15.0
+margin_top = 13.0
+margin_bottom = 12.0
+
+[node name="Label2" type="Label" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -519.0
+margin_top = 33.0
+margin_right = -214.0
+margin_bottom = 47.0
+text = "Weights of all items (relative chance to appear):"
+
+[node name="Label4" type="Label" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -850.0
+margin_top = 32.0
+margin_right = -545.0
+margin_bottom = 46.0
+text = "Upgrades selected:"
+align = 2
+
+[node name="Label3" type="Label" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -295.0
+margin_top = -123.0
+margin_right = 10.0
+margin_bottom = -109.0
+rect_scale = Vector2( 2, 2 )
+text = "Choose your upgrade!!!!!!"
+align = 1
+
+[node name="Debug" type="ScrollContainer" parent="."]
+modulate = Color( 1, 1, 1, 0.45098 )
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -519.0
+margin_top = 52.0
+margin_right = -30.0
+margin_bottom = -168.0
+
+[node name="Label" type="Label" parent="Debug"]
+margin_bottom = 14.0
+
+[node name="AcceptDialog" type="AcceptDialog" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -322.0
+margin_top = -122.5
+margin_right = 322.0
+margin_bottom = 122.5
+window_title = "Info"
+dialog_text = "Example dataset contains upgrades and weapons.
+- Up to 4 weapons can be selected.
+- Up to 2 copies of one weapon can be selected.
+- Upgrades don't appear if they are useless (e. g. elemental damage 
+won't appear if all you have no magic spells)
+- Mastery upgrades can be found if you have 3+ weapons of one type
+and 4 total weapons.
+- Health upgrades spawn more often if you have lots of Strength and Melee weapons (x1.5 per tag),
+but less often if you have Magic upgrades (x0.8 per tag).
+- 2 rare Legendary weapons can appear. Chance is higher if you level Strength or Magic.
+
+For easier mass editing of Resources, check out my Edit Resource as Spreadsheet."
+
+[node name="Navigation" parent="." instance=ExtResource( 18 )]
+
+[connection signal="pressed" from="1" to="Label" method="_on_1_pressed"]
+[connection signal="pressed" from="2" to="Label" method="_on_2_pressed"]
+[connection signal="pressed" from="3" to="Label" method="_on_3_pressed"]
+[connection signal="pressed" from="Info" to="AcceptDialog" method="popup"]
+[connection signal="pressed" from="Reset" to="Label" method="_on_reset_pressed"]

@@ -1,0 +1,54 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[ {
+"base": "Resource",
+"class": "AdvancedDie",
+"language": "GDScript",
+"path": "res://addons/advanced_random/advanced_die.gd"
+}, {
+"base": "Reference",
+"class": "CardDeck",
+"language": "GDScript",
+"path": "res://addons/advanced_random/card_deck.gd"
+}, {
+"base": "Reference",
+"class": "DiceArray",
+"language": "GDScript",
+"path": "res://addons/advanced_random/dice_array.gd"
+}, {
+"base": "Resource",
+"class": "DynamicWheelItem",
+"language": "GDScript",
+"path": "res://addons/advanced_random/dynamic_wheel_item.gd"
+}, {
+"base": "Reference",
+"class": "FortuneWheel",
+"language": "GDScript",
+"path": "res://addons/advanced_random/fortune_wheel.gd"
+} ]
+_global_script_class_icons={
+"AdvancedDie": "",
+"CardDeck": "",
+"DiceArray": "",
+"DynamicWheelItem": "",
+"FortuneWheel": ""
+}
+
+[application]
+
+run/main_scene="res://example/dynamic_wheel/upgrades.tscn"
+config/icon="res://example/icon.png"
+
+[rendering]
+
+quality/driver/driver_name="GLES2"
+vram_compression/import_etc=true
+vram_compression/import_etc2=false

@@ -1,0 +1,19 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://addons/advanced_random/dynamic_wheel_item.gd" type="Script" id=1]
+
+[resource]
+resource_name = "Upgrade: Magic Mastery"
+script = ExtResource( 1 )
+max_duplicates = 1
+tags = "mastery magic"
+requires_one_of_tags = ""
+tag_delimeter = " "
+base_weight = 15.0
+multiplier_per_tag = "magic 2.0"
+multiplier_if_tag_present = ""
+multiplier_if_tag_not_present = "elemental 0"
+max_tags_present = ""
+min_tags_present = "weapon 4; magic_weapon 3"
+list_item_delimeter = " "
+list_row_delimeter = ";"

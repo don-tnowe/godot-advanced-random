@@ -1,0 +1,14 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://addons/advanced_random/advanced_die.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+description = "Standard D6 die.
+For face values, you can use numbers (1, 85, 9.5)
+or strings of characters/\"symbols\" (A, BBB, XXYY).
+If you use numbers, be sure to set symbol_char_if_number to mark what symbol all numbers get converted to.
+"
+faces = [ "1", "2", "3", "4", "5", "6" ]
+symbol_char_if_number = "C"
+use_numbers_as_symbols = false

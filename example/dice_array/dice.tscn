@@ -1,0 +1,574 @@
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://example/dice_array/dice.gd" type="Script" id=1]
+[ext_resource path="res://example/dice_array/dice/starter2.tres" type="Resource" id=2]
+[ext_resource path="res://example/dice_array/dice/starter1.tres" type="Resource" id=3]
+[ext_resource path="res://example/dice_array/dice/starter3.tres" type="Resource" id=4]
+[ext_resource path="res://example/dice_array/dice/starter4.tres" type="Resource" id=5]
+[ext_resource path="res://example/example_navigation.tscn" type="PackedScene" id=6]
+
+[sub_resource type="Gradient" id=7]
+offsets = PoolRealArray( 0.674699, 1 )
+
+[sub_resource type="GradientTexture2D" id=3]
+gradient = SubResource( 7 )
+
+[sub_resource type="Gradient" id=8]
+colors = PoolColorArray( 0.0155067, 0.0588146, 0.264648, 1, 0, 0.830078, 1, 1 )
+
+[sub_resource type="GradientTexture2D" id=4]
+gradient = SubResource( 8 )
+
+[sub_resource type="Gradient" id=9]
+offsets = PoolRealArray( 0, 0.993976 )
+colors = PoolColorArray( 0, 0, 0, 1, 0.737305, 0.138245, 0.668272, 1 )
+
+[sub_resource type="GradientTexture2D" id=5]
+gradient = SubResource( 9 )
+
+[sub_resource type="Gradient" id=10]
+colors = PoolColorArray( 0.674805, 0.304453, 0, 1, 0.936523, 0.870317, 0.109749, 1 )
+
+[sub_resource type="GradientTexture2D" id=6]
+gradient = SubResource( 10 )
+
+[sub_resource type="Gradient" id=2]
+interpolation_mode = 2
+offsets = PoolRealArray( 0.651515, 1 )
+colors = PoolColorArray( 0.773438, 0.773438, 0.773438, 1, 0.472656, 0.472656, 0.472656, 1 )
+
+[sub_resource type="GradientTexture2D" id=1]
+gradient = SubResource( 2 )
+fill = 1
+fill_from = Vector2( 0.47905, 0.523743 )
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+symbol_textures = [ SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ) ]
+symbol_chars = [ "K", "C", "M", "Y" ]
+dice = [ ExtResource( 3 ), ExtResource( 2 ), ExtResource( 4 ), ExtResource( 5 ) ]
+
+[node name="Center" type="CenterContainer" parent="."]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 87.0
+margin_top = -300.0
+margin_right = -381.0
+margin_bottom = -127.0
+
+[node name="Grid" type="GridContainer" parent="Center"]
+margin_left = 230.0
+margin_top = 74.0
+margin_right = 326.0
+margin_bottom = 98.0
+columns = 4
+
+[node name="LineEdit" type="LineEdit" parent="Center/Grid"]
+margin_right = 96.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 96, 0 )
+
+[node name="Dice" type="Control" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_top = -100.0
+margin_bottom = -100.0
+
+[node name="Control3" type="Control" parent="Dice"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -31.0
+margin_top = 2.0
+margin_right = -31.0
+margin_bottom = 2.0
+
+[node name="Die" type="TextureRect" parent="Dice/Control3"]
+margin_left = -240.0
+margin_top = -127.0
+margin_right = -112.0
+margin_bottom = 1.0
+rect_min_size = Vector2( 128, 128 )
+texture = SubResource( 1 )
+expand = true
+
+[node name="CenterContainer" type="CenterContainer" parent="Dice/Control3/Die"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="GridContainer" type="GridContainer" parent="Dice/Control3/Die/CenterContainer"]
+margin_left = 64.0
+margin_top = 64.0
+margin_right = 64.0
+margin_bottom = 64.0
+columns = 3
+
+[node name="TextureRect" type="TextureRect" parent="Dice/Control3/Die/CenterContainer/GridContainer"]
+visible = false
+margin_right = 32.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+expand = true
+
+[node name="TextureRect2" type="TextureRect" parent="Dice/Control3/Die/CenterContainer/GridContainer"]
+visible = false
+margin_left = 36.0
+margin_right = 68.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+expand = true
+
+[node name="TextureRect3" type="TextureRect" parent="Dice/Control3/Die/CenterContainer/GridContainer"]
+visible = false
+margin_right = 32.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+expand = true
+
+[node name="TextureRect4" type="TextureRect" parent="Dice/Control3/Die/CenterContainer/GridContainer"]
+visible = false
+margin_top = 36.0
+margin_right = 32.0
+margin_bottom = 68.0
+rect_min_size = Vector2( 32, 32 )
+expand = true
+
+[node name="TextureRect5" type="TextureRect" parent="Dice/Control3/Die/CenterContainer/GridContainer"]
+visible = false
+margin_left = 36.0
+margin_top = 36.0
+margin_right = 68.0
+margin_bottom = 68.0
+rect_min_size = Vector2( 32, 32 )
+expand = true
+
+[node name="TextureRect6" type="TextureRect" parent="Dice/Control3/Die/CenterContainer/GridContainer"]
+visible = false
+margin_left = 72.0
+margin_top = 36.0
+margin_right = 104.0
+margin_bottom = 68.0
+rect_min_size = Vector2( 32, 32 )
+expand = true
+
+[node name="TextureRect7" type="TextureRect" parent="Dice/Control3/Die/CenterContainer/GridContainer"]
+visible = false
+margin_top = 72.0
+margin_right = 32.0
+margin_bottom = 104.0
+rect_min_size = Vector2( 32, 32 )
+expand = true
+
+[node name="TextureRect8" type="TextureRect" parent="Dice/Control3/Die/CenterContainer/GridContainer"]
+visible = false
+margin_left = 36.0
+margin_top = 72.0
+margin_right = 68.0
+margin_bottom = 104.0
+rect_min_size = Vector2( 32, 32 )
+expand = true
+
+[node name="TextureRect9" type="TextureRect" parent="Dice/Control3/Die/CenterContainer/GridContainer"]
+visible = false
+margin_left = 72.0
+margin_top = 72.0
+margin_right = 104.0
+margin_bottom = 104.0
+rect_min_size = Vector2( 32, 32 )
+expand = true
+
+[node name="Control4" type="Control" parent="Dice"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -31.0
+margin_top = 2.0
+margin_right = -31.0
+margin_bottom = 2.0
+
+[node name="Die" type="TextureRect" parent="Dice/Control4"]
+margin_left = -104.0
+margin_top = -127.0
+margin_right = 24.0
+margin_bottom = 1.0
+rect_min_size = Vector2( 128, 128 )
+texture = SubResource( 1 )
+expand = true
+
+[node name="CenterContainer" type="CenterContainer" parent="Dice/Control4/Die"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="GridContainer" type="GridContainer" parent="Dice/Control4/Die/CenterContainer"]
+margin_left = 64.0
+margin_top = 64.0
+margin_right = 64.0
+margin_bottom = 64.0
+columns = 3
+
+[node name="TextureRect" type="TextureRect" parent="Dice/Control4/Die/CenterContainer/GridContainer"]
+visible = false
+margin_right = 32.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+expand = true
+
+[node name="TextureRect2" type="TextureRect" parent="Dice/Control4/Die/CenterContainer/GridContainer"]
+visible = false
+margin_left = 36.0
+margin_right = 68.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+expand = true
+
+[node name="TextureRect3" type="TextureRect" parent="Dice/Control4/Die/CenterContainer/GridContainer"]
+visible = false
+margin_right = 32.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+expand = true
+
+[node name="TextureRect4" type="TextureRect" parent="Dice/Control4/Die/CenterContainer/GridContainer"]
+visible = false
+margin_top = 36.0
+margin_right = 32.0
+margin_bottom = 68.0
+rect_min_size = Vector2( 32, 32 )
+expand = true
+
+[node name="TextureRect5" type="TextureRect" parent="Dice/Control4/Die/CenterContainer/GridContainer"]
+visible = false
+margin_left = 36.0
+margin_top = 36.0
+margin_right = 68.0
+margin_bottom = 68.0
+rect_min_size = Vector2( 32, 32 )
+expand = true
+
+[node name="TextureRect6" type="TextureRect" parent="Dice/Control4/Die/CenterContainer/GridContainer"]
+visible = false
+margin_left = 72.0
+margin_top = 36.0
+margin_right = 104.0
+margin_bottom = 68.0
+rect_min_size = Vector2( 32, 32 )
+expand = true
+
+[node name="TextureRect7" type="TextureRect" parent="Dice/Control4/Die/CenterContainer/GridContainer"]
+visible = false
+margin_top = 72.0
+margin_right = 32.0
+margin_bottom = 104.0
+rect_min_size = Vector2( 32, 32 )
+expand = true
+
+[node name="TextureRect8" type="TextureRect" parent="Dice/Control4/Die/CenterContainer/GridContainer"]
+visible = false
+margin_left = 36.0
+margin_top = 72.0
+margin_right = 68.0
+margin_bottom = 104.0
+rect_min_size = Vector2( 32, 32 )
+expand = true
+
+[node name="TextureRect9" type="TextureRect" parent="Dice/Control4/Die/CenterContainer/GridContainer"]
+visible = false
+margin_left = 72.0
+margin_top = 72.0
+margin_right = 104.0
+margin_bottom = 104.0
+rect_min_size = Vector2( 32, 32 )
+expand = true
+
+[node name="Control" type="Control" parent="Dice"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -31.0
+margin_top = 2.0
+margin_right = -31.0
+margin_bottom = 2.0
+
+[node name="Die" type="TextureRect" parent="Dice/Control"]
+margin_left = 32.0
+margin_top = -127.0
+margin_right = 160.0
+margin_bottom = 1.0
+rect_min_size = Vector2( 128, 128 )
+texture = SubResource( 1 )
+expand = true
+
+[node name="CenterContainer" type="CenterContainer" parent="Dice/Control/Die"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="GridContainer" type="GridContainer" parent="Dice/Control/Die/CenterContainer"]
+margin_left = 64.0
+margin_top = 64.0
+margin_right = 64.0
+margin_bottom = 64.0
+columns = 3
+
+[node name="TextureRect" type="TextureRect" parent="Dice/Control/Die/CenterContainer/GridContainer"]
+visible = false
+margin_right = 32.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+expand = true
+
+[node name="TextureRect2" type="TextureRect" parent="Dice/Control/Die/CenterContainer/GridContainer"]
+visible = false
+margin_left = 36.0
+margin_right = 68.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+expand = true
+
+[node name="TextureRect3" type="TextureRect" parent="Dice/Control/Die/CenterContainer/GridContainer"]
+visible = false
+margin_right = 32.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+expand = true
+
+[node name="TextureRect4" type="TextureRect" parent="Dice/Control/Die/CenterContainer/GridContainer"]
+visible = false
+margin_top = 36.0
+margin_right = 32.0
+margin_bottom = 68.0
+rect_min_size = Vector2( 32, 32 )
+expand = true
+
+[node name="TextureRect5" type="TextureRect" parent="Dice/Control/Die/CenterContainer/GridContainer"]
+visible = false
+margin_left = 36.0
+margin_top = 36.0
+margin_right = 68.0
+margin_bottom = 68.0
+rect_min_size = Vector2( 32, 32 )
+expand = true
+
+[node name="TextureRect6" type="TextureRect" parent="Dice/Control/Die/CenterContainer/GridContainer"]
+visible = false
+margin_left = 72.0
+margin_top = 36.0
+margin_right = 104.0
+margin_bottom = 68.0
+rect_min_size = Vector2( 32, 32 )
+expand = true
+
+[node name="TextureRect7" type="TextureRect" parent="Dice/Control/Die/CenterContainer/GridContainer"]
+visible = false
+margin_top = 72.0
+margin_right = 32.0
+margin_bottom = 104.0
+rect_min_size = Vector2( 32, 32 )
+expand = true
+
+[node name="TextureRect8" type="TextureRect" parent="Dice/Control/Die/CenterContainer/GridContainer"]
+visible = false
+margin_left = 36.0
+margin_top = 72.0
+margin_right = 68.0
+margin_bottom = 104.0
+rect_min_size = Vector2( 32, 32 )
+expand = true
+
+[node name="TextureRect9" type="TextureRect" parent="Dice/Control/Die/CenterContainer/GridContainer"]
+visible = false
+margin_left = 72.0
+margin_top = 72.0
+margin_right = 104.0
+margin_bottom = 104.0
+rect_min_size = Vector2( 32, 32 )
+expand = true
+
+[node name="Control2" type="Control" parent="Dice"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -31.0
+margin_top = 2.0
+margin_right = -31.0
+margin_bottom = 2.0
+
+[node name="Die" type="TextureRect" parent="Dice/Control2"]
+margin_left = 168.0
+margin_top = -127.0
+margin_right = 296.0
+margin_bottom = 1.0
+rect_min_size = Vector2( 128, 128 )
+texture = SubResource( 1 )
+expand = true
+
+[node name="CenterContainer" type="CenterContainer" parent="Dice/Control2/Die"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="GridContainer" type="GridContainer" parent="Dice/Control2/Die/CenterContainer"]
+margin_left = 64.0
+margin_top = 64.0
+margin_right = 64.0
+margin_bottom = 64.0
+columns = 3
+
+[node name="TextureRect" type="TextureRect" parent="Dice/Control2/Die/CenterContainer/GridContainer"]
+visible = false
+margin_right = 32.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+expand = true
+
+[node name="TextureRect2" type="TextureRect" parent="Dice/Control2/Die/CenterContainer/GridContainer"]
+visible = false
+margin_left = 36.0
+margin_right = 68.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+expand = true
+
+[node name="TextureRect3" type="TextureRect" parent="Dice/Control2/Die/CenterContainer/GridContainer"]
+visible = false
+margin_right = 32.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+expand = true
+
+[node name="TextureRect4" type="TextureRect" parent="Dice/Control2/Die/CenterContainer/GridContainer"]
+visible = false
+margin_top = 36.0
+margin_right = 32.0
+margin_bottom = 68.0
+rect_min_size = Vector2( 32, 32 )
+expand = true
+
+[node name="TextureRect5" type="TextureRect" parent="Dice/Control2/Die/CenterContainer/GridContainer"]
+visible = false
+margin_left = 36.0
+margin_top = 36.0
+margin_right = 68.0
+margin_bottom = 68.0
+rect_min_size = Vector2( 32, 32 )
+expand = true
+
+[node name="TextureRect6" type="TextureRect" parent="Dice/Control2/Die/CenterContainer/GridContainer"]
+visible = false
+margin_left = 72.0
+margin_top = 36.0
+margin_right = 104.0
+margin_bottom = 68.0
+rect_min_size = Vector2( 32, 32 )
+expand = true
+
+[node name="TextureRect7" type="TextureRect" parent="Dice/Control2/Die/CenterContainer/GridContainer"]
+visible = false
+margin_top = 72.0
+margin_right = 32.0
+margin_bottom = 104.0
+rect_min_size = Vector2( 32, 32 )
+expand = true
+
+[node name="TextureRect8" type="TextureRect" parent="Dice/Control2/Die/CenterContainer/GridContainer"]
+visible = false
+margin_left = 36.0
+margin_top = 72.0
+margin_right = 68.0
+margin_bottom = 104.0
+rect_min_size = Vector2( 32, 32 )
+expand = true
+
+[node name="TextureRect9" type="TextureRect" parent="Dice/Control2/Die/CenterContainer/GridContainer"]
+visible = false
+margin_left = 72.0
+margin_top = 72.0
+margin_right = 104.0
+margin_bottom = 104.0
+rect_min_size = Vector2( 32, 32 )
+expand = true
+
+[node name="Button" type="Button" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -78.0
+margin_top = -78.0
+margin_right = 77.0
+margin_bottom = -58.0
+text = "Roll!"
+
+[node name="Label" type="Label" parent="."]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 298.0
+margin_top = -331.0
+margin_right = 414.0
+margin_bottom = -317.0
+text = "Edit face symbols:"
+
+[node name="Label2" type="Label" parent="."]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 637.0
+margin_top = -331.0
+margin_right = 753.0
+margin_bottom = -317.0
+text = "Symbol counts:"
+
+[node name="Sums" type="Label" parent="."]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 629.0
+margin_top = -312.0
+margin_right = 745.0
+margin_bottom = -281.0
+rect_scale = Vector2( 2, 2 )
+text = "C
+M
+Y"
+
+[node name="Info" type="Button" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -121.5
+margin_top = -59.0
+margin_right = 121.5
+margin_bottom = -39.0
+text = "Info"
+
+[node name="Navigation" parent="." instance=ExtResource( 6 )]
+
+[node name="AcceptDialog" type="AcceptDialog" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -212.0
+margin_top = -99.0
+margin_right = 212.0
+margin_bottom = 99.0
+window_title = "Info"
+dialog_text = "These dice use collections of symbols instead of numbers.
+(well, they can use numbers, but these get converted).
+The text fields on the left change the symbols that can roll.
+Try:
+- Replacing the first column's numbers with something higher
+- Giving other 3 columns more C, M and Y"
+dialog_autowrap = true
+
+[connection signal="pressed" from="Button" to="." method="roll"]
+[connection signal="pressed" from="Info" to="AcceptDialog" method="popup"]

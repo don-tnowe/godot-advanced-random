@@ -1,0 +1,10 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://addons/advanced_random/advanced_die.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+description = "A die with a bunch of Ms."
+faces = [ "M", "M", "M", "MM", "MM", "MMMM" ]
+symbol_char_if_number = "M"
+use_numbers_as_symbols = false

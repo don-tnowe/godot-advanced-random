@@ -1,0 +1,273 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://example/card_deck/cards.gd" type="Script" id=1]
+[ext_resource path="res://example/example_navigation.tscn" type="PackedScene" id=2]
+
+[sub_resource type="StyleBoxEmpty" id=3]
+
+[sub_resource type="StyleBoxEmpty" id=4]
+
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Scaler/Label2:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Scaler:rect_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=1]
+resource_name = "Reshuffle"
+length = 2.147
+tracks/0/type = "value"
+tracks/0/path = NodePath("Scaler/Label2:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Scaler:rect_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 4, 4 ), Vector2( 4, 4 ), Vector2( 1, 1 ) ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 2 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "update_card_view"
+} ]
+}
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="PileDraw" type="Panel" parent="."]
+show_behind_parent = true
+margin_left = 48.0
+margin_top = 50.0
+margin_right = 169.0
+margin_bottom = 550.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="PileDiscard" type="Panel" parent="."]
+show_behind_parent = true
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -179.0
+margin_top = 46.0
+margin_right = -58.0
+margin_bottom = 546.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Hand" type="Panel" parent="."]
+show_behind_parent = true
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -58.0
+margin_top = -76.0
+margin_right = -58.0
+margin_bottom = -38.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Label" type="Label" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -200.5
+margin_top = 131.0
+margin_right = 200.5
+margin_bottom = 162.0
+text = "Click on cards to move them into discard pile (right).
+Unless you toggled on the:"
+align = 1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Label2" type="Label" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -200.0
+margin_top = -135.0
+margin_right = 201.0
+margin_bottom = -121.0
+text = "Click on the button below to draw from the Draw pile (left)"
+align = 1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CheckBox" type="CheckBox" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -122.0
+margin_top = 163.0
+margin_right = 131.0
+margin_bottom = 187.0
+text = "Put Back Onto Draw Pile Mode"
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Create" type="Button" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -105.0
+margin_top = 215.0
+margin_right = 110.0
+margin_bottom = 235.0
+text = "Create Grey Card"
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Cards" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+mouse_filter = 2
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Button" type="Button" parent="Cards"]
+margin_left = 58.0
+margin_top = 54.0
+margin_right = 179.0
+margin_bottom = 235.5
+custom_styles/focus = SubResource( 3 )
+disabled = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ActualPressableButton" type="Button" parent="Cards/Button"]
+margin_right = 121.0
+margin_bottom = 181.5
+custom_styles/focus = SubResource( 4 )
+flat = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Label" type="Label" parent="Cards/Button"]
+margin_left = 11.0
+margin_top = 13.0
+margin_right = 36.0
+margin_bottom = 50.0
+rect_scale = Vector2( 4, 4 )
+text = "0"
+align = 1
+valign = 1
+clip_text = true
+
+[node name="Button" type="Button" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -105.0
+margin_top = -113.0
+margin_right = 110.0
+margin_bottom = -93.0
+text = "Gimme Kards"
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "RESET"
+anims/RESET = SubResource( 2 )
+anims/Reshuffle = SubResource( 1 )
+
+[node name="Scaler" type="Control" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_top = 18.0
+margin_bottom = 18.0
+mouse_filter = 2
+
+[node name="Label2" type="Label" parent="Scaler"]
+modulate = Color( 1, 1, 1, 0 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -112.5
+margin_top = -7.0
+margin_right = 112.5
+margin_bottom = 7.0
+text = "Draw Pile Emptied"
+align = 1
+
+[node name="ColorRect" type="ColorRect" parent="Scaler/Label2"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color( 0, 0, 0, 0.756863 )
+
+[node name="Navigation" parent="." instance=ExtResource( 2 )]
+
+[connection signal="pressed" from="Create" to="." method="_on_Create_pressed"]
+[connection signal="pressed" from="Button" to="." method="_on_Draw_pressed"]
