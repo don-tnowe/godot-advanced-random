@@ -7,7 +7,8 @@ var _dice := []
 var _dice_faces_rolled := []
 var _dice_symbol_counts := {}
 
-
+# Create a DiceArray object. Optionally, pass a RandomNumberGenerator - if not, new one is created.
+# Set `dice` to configure which `AdvancedDie` are rolled at the start. You can reassign these later when calling `roll()`
 func _init(random_number_generator : RandomNumberGenerator = null, dice : Array = []):
 	rng = random_number_generator
 	if !random_number_generator:

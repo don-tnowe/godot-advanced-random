@@ -3,7 +3,7 @@ extends Reference
 
 var rng : RandomNumberGenerator
 
-
+# Create a FortuneWheel object. Optionally, pass a RandomNumberGenerator - if not, new one is created.
 func _init(random_number_generator : RandomNumberGenerator = null):
 	rng = random_number_generator
 	if random_number_generator == null:

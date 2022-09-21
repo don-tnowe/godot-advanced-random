@@ -26,11 +26,13 @@ func _set_card_count(v):
 
 	card_count = v
 
-
+# Create a CardDeck object. Optionally, pass a RandomNumberGenerator - if not, new one is created.
+# `card_count` defines number of cards in the deck. It can be changed later by setting `card_count`.
+# `pile_***` are indices of the draw (`PILE_DRAW`), active (`PILE_IN_PLAY`) and discard (`PILE_DISCARD`) piles.
+# Cards start in the Draw pile, move into gameplay when `draw()`n, into Discard when `play()`ed, and back to Draw once it's empty.
 func _init(
 	card_count : int, random_number_generator : RandomNumberGenerator = null, 
-	pile_draw_from := PILE_DRAW, pile_draw_into := PILE_IN_PLAY, pile_refill_from := PILE_DISCARD, 
-	pile_count : int = 3
+	pile_draw_from := PILE_DRAW, pile_draw_into := PILE_IN_PLAY, pile_refill_from := PILE_DISCARD
 ):
 	self.pile_draw_from = PILE_DRAW
 	self.pile_draw_into = PILE_IN_PLAY
