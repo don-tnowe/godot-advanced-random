@@ -6,9 +6,12 @@
 resource_name = "Upgrade: Magic Mastery"
 script = ExtResource( 1 )
 max_duplicates = 1
-tags = "mastery magic"
+tags = ""
 requires_one_of_tags = ""
 tag_delimeter = " "
+tags_array = [ "mastery", "magic" ]
+requires_one_of_tags_array = [  ]
+tag_all_copies = true
 base_weight = 15.0
 multiplier_per_tag = "magic 2.0"
 multiplier_if_tag_present = ""

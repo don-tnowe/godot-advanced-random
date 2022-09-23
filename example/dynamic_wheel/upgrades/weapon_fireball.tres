@@ -5,10 +5,13 @@
 [resource]
 resource_name = "Weapon: Fireball"
 script = ExtResource( 1 )
-max_duplicates = 2
-tags = "weapon magic_weapon magic fireball projectile elemental"
+max_duplicates = 8
+tags = "fireball"
 requires_one_of_tags = ""
 tag_delimeter = " "
+tags_array = [ "weapon", "magic_weapon", "magic", "projectile", "elemental" ]
+requires_one_of_tags_array = [  ]
+tag_all_copies = false
 base_weight = 10.0
 multiplier_per_tag = "magic 2.0"
 multiplier_if_tag_present = ""

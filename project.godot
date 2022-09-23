@@ -20,6 +20,11 @@ _global_script_classes=[ {
 "path": "res://addons/advanced_random/card_deck.gd"
 }, {
 "base": "Reference",
+"class": "CellEditor",
+"language": "GDScript",
+"path": "res://addons/resources_speadsheet_view/typed_cells/cell_editor.gd"
+}, {
+"base": "Reference",
 "class": "DiceArray",
 "language": "GDScript",
 "path": "res://addons/advanced_random/dice_array.gd"
@@ -38,20 +43,49 @@ _global_script_classes=[ {
 "class": "FortuneWheel",
 "language": "GDScript",
 "path": "res://addons/advanced_random/fortune_wheel.gd"
+}, {
+"base": "Control",
+"class": "SheetsDockEditor",
+"language": "GDScript",
+"path": "res://addons/resources_speadsheet_view/typed_editors/dock_base.gd"
+}, {
+"base": "Reference",
+"class": "TextEditingUtils",
+"language": "GDScript",
+"path": "res://addons/resources_speadsheet_view/text_editing_utils.gd"
+}, {
+"base": "Button",
+"class": "ThemeIconButton",
+"language": "GDScript",
+"path": "res://addons/resources_speadsheet_view/editor_icon_button.gd"
+}, {
+"base": "Control",
+"class": "ThemeStylebox",
+"language": "GDScript",
+"path": "res://addons/resources_speadsheet_view/editor_stylebox_overrider.gd"
 } ]
 _global_script_class_icons={
 "AdvancedDie": "",
 "CardDeck": "",
+"CellEditor": "",
 "DiceArray": "",
 "DynamicWheelItem": "",
 "FairNG": "",
-"FortuneWheel": ""
+"FortuneWheel": "",
+"SheetsDockEditor": "",
+"TextEditingUtils": "",
+"ThemeIconButton": "",
+"ThemeStylebox": ""
 }
 
 [application]
 
 run/main_scene="res://example/fairng/fairng_test.tscn"
 config/icon="res://example/icon.png"
+
+[editor_plugins]
+
+enabled=PoolStringArray( "res://addons/resources_speadsheet_view/plugin.cfg" )
 
 [rendering]
 

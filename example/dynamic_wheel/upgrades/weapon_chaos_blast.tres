@@ -5,10 +5,13 @@
 [resource]
 resource_name = "Weapon: Chaos Blast!!!"
 script = ExtResource( 1 )
-max_duplicates = 1
-tags = "weapon magic_weapon magic legendary chaosblast aoe"
+max_duplicates = 4
+tags = "chaosblast"
 requires_one_of_tags = ""
 tag_delimeter = " "
+tags_array = [ "weapon", "magic_weapon", "magic", "legendary" ]
+requires_one_of_tags_array = [  ]
+tag_all_copies = false
 base_weight = 1.0
 multiplier_per_tag = "magic 2.0; weapon 1.2"
 multiplier_if_tag_present = ""

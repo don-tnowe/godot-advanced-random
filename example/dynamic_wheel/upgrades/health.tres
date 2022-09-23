@@ -6,9 +6,12 @@
 resource_name = "Upgrade: Health"
 script = ExtResource( 1 )
 max_duplicates = 10
-tags = "health melee"
+tags = ""
 requires_one_of_tags = ""
 tag_delimeter = " "
+tags_array = [ "health", "melee" ]
+requires_one_of_tags_array = [  ]
+tag_all_copies = true
 base_weight = 10.0
 multiplier_per_tag = "strength 1.5; melee 1.5; magic 0.8"
 multiplier_if_tag_present = ""

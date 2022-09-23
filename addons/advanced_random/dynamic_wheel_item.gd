@@ -4,19 +4,22 @@ extends Resource
 
 export var max_duplicates := 0
 export var tags := "tag_1 tag_2 tag_3" setget _set_tags
-export var requires_one_of_tags := ""
-export(String) var tag_delimeter = " "
+export var requires_one_of_tags := "" setget _set_requires_one_of_tags
+export var tag_delimeter := " "
+export(Array, String) var tags_array setget _set_tags_array
+export(Array, String) var requires_one_of_tags_array setget _set_requires_one_of_tags_array
+export var tag_all_copies := true
 export var base_weight := 10.0
 export(String, MULTILINE) var multiplier_per_tag := "" setget _set_multiplier_per_tag
 export(String, MULTILINE) var multiplier_if_tag_present := "" setget _set_multiplier_if_tag_present
 export(String, MULTILINE) var multiplier_if_tag_not_present := "" setget _set_multiplier_if_tag_not_present
 export(String, MULTILINE) var max_tags_present := "" setget _set_max_tags_present
 export(String, MULTILINE) var min_tags_present := "" setget _set_min_tags_present
-export(String) var list_item_delimeter = " " setget _set_list_item_delimeter
-export(String) var list_row_delimeter = ";" setget _set_list_row_delimeter
+export var list_item_delimeter := " " setget _set_list_item_delimeter
+export var list_row_delimeter := ";" setget _set_list_row_delimeter
 
 var _is_cached := false
-var _tag_array := []
+var _tag_dict := {}
 var _requires_one_of_tags_array := []
 var _multiplier_per_tag_dict := {}
 var _multiplier_if_tag_present_dict := {}
@@ -29,6 +32,20 @@ func _set_tags(v):
 	tags = v
 	_is_cached = false
 
+
+func _set_requires_one_of_tags(v):
+	requires_one_of_tags = v
+	_is_cached = false
+
+
+func _set_tags_array(v):
+	tags_array = v
+	_is_cached = false
+
+
+func _set_requires_one_of_tags_array(v):
+	requires_one_of_tags_array = v
+	_is_cached = false
 
 func _set_multiplier_per_tag(v):
 	multiplier_per_tag = v
@@ -65,12 +82,18 @@ func _set_list_row_delimeter(v):
 	_is_cached = false
 
 
-func get_weight(owned_tags : Dictionary) -> float:
+func get_weight(owned_tags : Dictionary, owned_items : Dictionary = {}) -> float:
 	if !_is_cached:
 		_cache_lists()
-	
+
 	if !owned_one_of_tags(owned_tags, _requires_one_of_tags_array):
 		return 0.0
+
+	if owned_items.has(self):
+		owned_tags = owned_tags.duplicate()
+		for k in _tag_dict:
+			if owned_tags.has(k):
+				owned_tags[k] -= _tag_dict[k] * (owned_items[self] if tag_all_copies else 1)
 
 	for k in _max_tags_present_dict:
 		if owned_tags.get(k, 0) >= _max_tags_present_dict[k]:
@@ -79,7 +102,6 @@ func get_weight(owned_tags : Dictionary) -> float:
 	for k in _min_tags_present_dict:
 		if owned_tags.get(k, 0) < _min_tags_present_dict[k]:
 			return 0.0
-
 	var result_weight := base_weight
 	for k in _multiplier_per_tag_dict:
 		result_weight *= pow(_multiplier_per_tag_dict[k], owned_tags.get(k, 0))
@@ -96,8 +118,14 @@ func get_weight(owned_tags : Dictionary) -> float:
 
 
 func _cache_lists():
-	_tag_array = tags.split(tag_delimeter) if tags != "" else []
+	_tag_dict.clear()
+	var tag_array = tags.split(tag_delimeter) if tags != "" else []
+	tag_array.append_array(tags_array)
+	for x in tag_array:
+		_tag_dict[x] = _tag_dict.get(x, 0) + 1
+
 	_requires_one_of_tags_array = requires_one_of_tags.split(tag_delimeter) if requires_one_of_tags != "" else []
+	_requires_one_of_tags_array.append_array(requires_one_of_tags_array)
 
 	_multiplier_per_tag_dict.clear()
 	_multiplier_if_tag_present_dict.clear()
@@ -123,21 +151,27 @@ func _cache_text_into_dictionary(dict : Dictionary, list_string : String):
 		)
 
 
-func get_tag_array(unsafe : bool = false) -> Array:
+func get_tag_dict(unsafe : bool = false) -> Dictionary:
 	if !_is_cached:
 		_cache_lists()
 	
-	return _tag_array.duplicate() if !unsafe else _tag_array
+	return _tag_dict.duplicate() if !unsafe else _tag_dict
 
 
 
-func get_weight_debug(owned_tags : Dictionary) -> String:
+func get_weight_debug(owned_tags : Dictionary, owned_items : Dictionary) -> String:
 	var beginning := resource_path.get_file() + " >>> "
 	if !_is_cached:
 		_cache_lists()
 	
 	if !owned_one_of_tags(owned_tags, _requires_one_of_tags_array):
 		return beginning + "0\n    None of requires_one_of_tags owned."
+	
+	if owned_items.has(self):
+		owned_tags = owned_tags.duplicate()
+		for k in _tag_dict:
+			if owned_tags.has(k):
+				owned_tags[k] -= _tag_dict[k] * (owned_items[self] if tag_all_copies else 1)
 
 	var result_text := ""
 	for k in _max_tags_present_dict:

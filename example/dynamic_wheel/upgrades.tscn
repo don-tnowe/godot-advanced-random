@@ -157,11 +157,15 @@ margin_bottom = 122.5
 window_title = "Info"
 dialog_text = "Example dataset contains upgrades and weapons.
 - Up to 4 weapons can be selected.
-- Up to 2 copies of one weapon can be selected.
+- Up to 8 copies of each weapon can be selected (4 for legendaries)
+- Weapons have tag_all_copies set to false, so tags only count for one copy of a weapon
+
+- Upgrades have a maximum copy count too.
 - Upgrades don't appear if they are useless (e. g. elemental damage 
 won't appear if all you have no magic spells)
 - Mastery upgrades can be found if you have 3+ weapons of one type
 and 4 total weapons.
+
 - Health upgrades spawn more often if you have lots of Strength and Melee weapons (x1.5 per tag),
 but less often if you have Magic upgrades (x0.8 per tag).
 - 2 rare Legendary weapons can appear. Chance is higher if you level Strength or Magic.

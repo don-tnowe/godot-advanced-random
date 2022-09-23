@@ -6,9 +6,12 @@
 resource_name = "Upgrade: Strength Mastery"
 script = ExtResource( 1 )
 max_duplicates = 1
-tags = "mastery strength"
+tags = ""
 requires_one_of_tags = ""
 tag_delimeter = " "
+tags_array = [ "mastery", "strength" ]
+requires_one_of_tags_array = [  ]
+tag_all_copies = true
 base_weight = 15.0
 multiplier_per_tag = "strength 2.0"
 multiplier_if_tag_present = ""

@@ -8,10 +8,11 @@ var rng := FortuneWheel.new()
 
 
 func roll():
+	var counts = FortuneWheel.count_tags(items_owned)
 	$"../Debug/Label".text = "\n\n".join(rng.get_dynamic_weights_debug(
 		items_available,
-		FortuneWheel.count_tags(items_owned),
-		items_owned
+		counts[0],
+		counts[1]
 	))
 	current_options = rng.spin_dynamic_batch(items_available, items_owned, 3)
 	$"../1".text = items_available[current_options[0]].resource_name

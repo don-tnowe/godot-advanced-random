@@ -5,10 +5,13 @@
 [resource]
 resource_name = "Weapon: Axe"
 script = ExtResource( 1 )
-max_duplicates = 2
-tags = "weapon strength_weapon strength aoe melee"
+max_duplicates = 8
+tags = "axe"
 requires_one_of_tags = ""
 tag_delimeter = " "
+tags_array = [ "weapon", "strength_weapon", "strength", "aoe", "melee" ]
+requires_one_of_tags_array = [  ]
+tag_all_copies = false
 base_weight = 10.0
 multiplier_per_tag = "strength 2.0"
 multiplier_if_tag_present = ""
