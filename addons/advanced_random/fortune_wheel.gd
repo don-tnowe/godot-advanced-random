@@ -61,7 +61,7 @@ func spin(weights : Array) -> int:
 	
 	return -1
 
-# A weighted randomness function that takes an `item_pool` of `DynamicWheelItem`s that have their weights based on items in `items_owned`. 
+# A weighted randomness function that takes an `item_pool` of `DynamicWheelItem`s that have their weights based on items in `items_owned`.
 # You can provide `precalculated_counts` from calling `count_tags_items()` and modifying the dictionaries.
 # Returns: Position of the result inside `item_pool`.
 func spin_dynamic(item_pool : Array, items_owned : Array, precalculated_counts : Array = []) -> int:
@@ -85,10 +85,11 @@ func spin_dynamic_batch(item_pool : Array, items_owned : Array, count : int = 1,
 
 # Counts tags and items in a `DynamicWheelItem` collection, returning an array of tag count and item count.
 # Optionally, pass items to ignore - comparison is done by their `resource_path`.
+# You can provide `precalculated_counts` from another call of this to tally up from multiple item pools.
 # Items without `tag_all_copies` set will be only counted ONCE.
-static func count_tags_items(items : Array = [], ignore_items : Array = []) -> Array:
-	var tags_found := {}
-	var items_found := {}
+static func count_tags_items(items : Array = [], ignore_items : Array = [], precalculated_counts : Array = [{}, {}]) -> Array:
+	var tags_found : Dictionary = precalculated_counts[0]
+	var items_found : Dictionary = precalculated_counts[1]
 	var cur_item_tag_dict : Dictionary
 	for x in items:
 		if array_has_resource_with_path(ignore_items, x.resource_path):
