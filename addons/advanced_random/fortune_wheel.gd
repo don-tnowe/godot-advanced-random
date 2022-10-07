@@ -62,28 +62,34 @@ func spin(weights : Array) -> int:
 	return -1
 
 # A weighted randomness function that takes an `item_pool` of `DynamicWheelItem`s that have their weights based on items in `items_owned`. 
+# You can provide `precalculated_counts` from calling `count_tags_items()` and modifying the dictionaries.
 # Returns: Position of the result inside `item_pool`.
-func spin_dynamic(item_pool : Array, items_owned : Array) -> int:
-	var counts := count_tags(items_owned)
-	var weights := get_dynamic_weights(item_pool, counts[0], counts[1])
+func spin_dynamic(item_pool : Array, items_owned : Array, precalculated_counts : Array = []) -> int:
+	if precalculated_counts.size() == 0:
+		precalculated_counts = count_tags_items(items_owned)
+
+	var weights := get_dynamic_weights(item_pool, precalculated_counts[0], precalculated_counts[1])
 	return spin(weights)
 
 # A variation of `spin_dynamic` that returns multiple values. items in resulting array do not repeat.
-func spin_dynamic_batch(item_pool : Array, items_owned : Array, count : int = 1) -> Array:
-	var counts := count_tags(items_owned)
-	var weights := get_dynamic_weights(item_pool, counts[0], counts[1])
+# You can provide `precalculated_counts` from calling `count_tags_items()` and modifying the dictionaries.
+func spin_dynamic_batch(item_pool : Array, items_owned : Array, count : int = 1, precalculated_counts : Array = []) -> Array:
+	if precalculated_counts.size() == 0:
+		precalculated_counts = count_tags_items(items_owned)
+	
+	var weights := get_dynamic_weights(item_pool, precalculated_counts[0], precalculated_counts[1])
 	if count == 1:
 		return [spin(weights)]
 	
 	return spin_batch(weights, count)
 
-# Counts tags in a `DynamicWheelItem` collection, returning an array of tag count and item count.
+# Counts tags and items in a `DynamicWheelItem` collection, returning an array of tag count and item count.
 # Optionally, pass items to ignore - comparison is done by their `resource_path`.
 # Items without `tag_all_copies` set will be only counted ONCE.
-static func count_tags(items : Array, ignore_items : Array = []) -> Array:
-	var dict := {}
+static func count_tags_items(items : Array = [], ignore_items : Array = []) -> Array:
+	var tags_found := {}
 	var items_found := {}
-	var tag_dict : Dictionary
+	var cur_item_tag_dict : Dictionary
 	for x in items:
 		if array_has_resource_with_path(ignore_items, x.resource_path):
 			continue
@@ -92,11 +98,11 @@ static func count_tags(items : Array, ignore_items : Array = []) -> Array:
 		if !x.tag_all_copies && items_found[x] > 1:
 			continue
 		
-		tag_dict = x.get_tag_dict(true)
-		for k in tag_dict:
-			dict[k] = dict.get(k, 0) + tag_dict[k]
+		cur_item_tag_dict = x.get_tag_dict(true)
+		for k in cur_item_tag_dict:
+			tags_found[k] = tags_found.get(k, 0) + cur_item_tag_dict[k]
 
-	return [dict, items_found]
+	return [tags_found, items_found]
 
 # Calculates weights of a `DynamicWheelItem` collection. Use with `spin()` and `spin_batch()`.
 static func get_dynamic_weights(item_pool : Array, owned_tags : Dictionary, owned_items : Dictionary = {}) -> Array:

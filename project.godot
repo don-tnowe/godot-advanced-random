@@ -80,6 +80,7 @@ _global_script_class_icons={
 
 [application]
 
+config/name="Addon: Advanced Random Stuff"
 run/main_scene="res://example/fairng/fairng_test.tscn"
 config/icon="res://example/icon.png"
 

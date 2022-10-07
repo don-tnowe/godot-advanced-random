@@ -8,7 +8,7 @@ var rng := FortuneWheel.new()
 
 
 func roll():
-	var counts = FortuneWheel.count_tags(items_owned)
+	var counts = FortuneWheel.count_tags_items(items_owned)
 	$"../Debug/Label".text = "\n\n".join(rng.get_dynamic_weights_debug(
 		items_available,
 		counts[0],
