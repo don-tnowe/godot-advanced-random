@@ -2,6 +2,8 @@ tool
 class_name DynamicWheelItem
 extends Resource
 
+const TAG_SELF := "@self"
+
 export var max_duplicates := 0
 export var tags := "tag_1 tag_2 tag_3" setget _set_tags
 export var requires_one_of_tags := "" setget _set_requires_one_of_tags
@@ -82,14 +84,14 @@ func _set_list_row_delimeter(v):
 	_is_cached = false
 
 
-func get_weight(owned_tags : Dictionary, owned_items : Dictionary = {}) -> float:
+func get_weight(owned_tags : Dictionary, owned_items : Dictionary = {}, ignore_if_has_duplicates : bool = false) -> float:
 	if !_is_cached:
 		_cache_lists()
 
 	if !owned_one_of_tags(owned_tags, _requires_one_of_tags_array):
 		return 0.0
 
-	if owned_items.has(self):
+	if !ignore_if_has_duplicates && owned_items.has(self):
 		owned_tags = owned_tags.duplicate()
 		for k in _tag_dict:
 			if owned_tags.has(k):
@@ -102,16 +104,21 @@ func get_weight(owned_tags : Dictionary, owned_items : Dictionary = {}) -> float
 	for k in _min_tags_present_dict:
 		if owned_tags.get(k, 0) < _min_tags_present_dict[k]:
 			return 0.0
+	
 	var result_weight := base_weight
+
+	if _multiplier_per_tag_dict.has(TAG_SELF):
+		result_weight *= pow(_multiplier_per_tag_dict[TAG_SELF], owned_items.get(self, 0))
+	
 	for k in _multiplier_per_tag_dict:
 		result_weight *= pow(_multiplier_per_tag_dict[k], owned_tags.get(k, 0))
-
+	
 	for k in _multiplier_if_tag_present_dict:
-		if owned_tags.has(k):
+		if (k == TAG_SELF && owned_items.has(self)) || owned_tags.has(k):
 			result_weight *= _multiplier_if_tag_present_dict[k]
 	
 	for k in _multiplier_if_tag_not_present_dict:
-		if !owned_tags.has(k):
+		if (k == TAG_SELF && !owned_items.has(self)) || !owned_tags.has(k):
 			result_weight *= _multiplier_if_tag_not_present_dict[k]
 
 	return result_weight
@@ -185,34 +192,42 @@ func get_weight_debug(owned_tags : Dictionary, owned_items : Dictionary) -> Stri
 			return beginning + result_text + " requirements not met"
 
 	var result_weight := base_weight
+	
+	if _multiplier_per_tag_dict.has(TAG_SELF):
+		result_text += "\n    Already owned " + str(owned_items.get(self, 0)) + " copies: x" + str(_multiplier_per_tag_dict[TAG_SELF])
+		result_weight *= pow(_multiplier_per_tag_dict[TAG_SELF], owned_items.get(self, 0))
+
 	for k in _multiplier_per_tag_dict:
 		result_text += "\n    Owned " + str(owned_tags.get(k, 0)) + " " + k + ": W x" + str(pow(_multiplier_per_tag_dict[k], owned_tags.get(k, 0)))
 		result_weight *= pow(_multiplier_per_tag_dict[k], owned_tags.get(k, 0))
 
 	for k in _multiplier_if_tag_present_dict:
-		if owned_tags.has(k):
+		if (k == TAG_SELF && owned_items.has(self)) || owned_tags.has(k):
 			result_text += "\n    Owned " + k + ": W x" + str(_multiplier_if_tag_present_dict[k])
 			result_weight *= _multiplier_if_tag_present_dict[k]
 	
 	for k in _multiplier_if_tag_not_present_dict:
-		if !owned_tags.has(k):
+		if (k == TAG_SELF && !owned_items.has(self)) || !owned_tags.has(k):
 			result_text += "\n    Not owned " + k + ": W x" + str(_multiplier_if_tag_not_present_dict[k])
 			result_weight *= _multiplier_if_tag_not_present_dict[k]
 	
-	assert(result_weight == get_weight(owned_tags), _get_debug_error_message(result_weight, owned_tags, result_text))
+	assert(result_weight == get_weight(owned_tags, owned_items, true), _get_debug_error_message(result_weight, owned_tags, owned_items, result_text))
 	return beginning + str(result_weight) + result_text
 	
 
-func _get_debug_error_message(result_weight, owned_tags, result_text):
-	if result_weight == get_weight(owned_tags): return
-	printerr("Debug weight does not correspond to non-debug calculations: " + resource_path.get_file() + "\n" + result_text)
+func _get_debug_error_message(result_weight, owned_tags, owned_items, result_text):
+	var nd_weight := get_weight(owned_tags, owned_items, true)
+	if result_weight == nd_weight: return
+	printerr(
+		"Debug weight does not correspond to non-debug calculations: " + resource_path.get_file()
+		+ "\n" + result_text + "\n" + str(result_weight) + "\n" + str(nd_weight)
+	)
 	return (
 		"Debug weight does not correspond to non-debug calculations.\nDebug W: "
 		+ str(result_weight)
 		+ "\nNon-debug W: " 
-		+ str(get_weight(owned_tags))
+		+ str(nd_weight)
 	)
-	
 
 
 func owned_one_of_tags(owned_tags : Dictionary, search_tags : Array) -> bool:

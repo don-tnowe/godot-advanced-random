@@ -6,7 +6,7 @@
 resource_name = "Weapon: Lightning"
 script = ExtResource( 1 )
 max_duplicates = 8
-tags = "lightning"
+tags = "@lightning"
 requires_one_of_tags = ""
 tag_delimeter = " "
 tags_array = [ "weapon", "magic_weapon", "magic", "elemental" ]
@@ -14,7 +14,7 @@ requires_one_of_tags_array = [  ]
 tag_all_copies = false
 base_weight = 10.0
 multiplier_per_tag = "magic 2.0"
-multiplier_if_tag_present = ""
+multiplier_if_tag_present = "@self 4.0"
 multiplier_if_tag_not_present = ""
 max_tags_present = "weapon 4"
 min_tags_present = ""
