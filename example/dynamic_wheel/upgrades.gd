@@ -9,6 +9,14 @@ var rng := FortuneWheel.new()
 
 func roll():
 	var counts = FortuneWheel.count_tags_items(items_owned)
+	text = ""
+	for k in counts[1]:
+		text += k.resource_path.get_file().get_basename() + ": x" + str(counts[1][k]) + "\n"
+	
+	text += "\n"
+	for k in counts[0]:
+		text += "#" + k + ": x" + str(counts[0][k]) + "\n"
+
 	$"../Debug/Label".text = "\n\n".join(rng.get_dynamic_weights_debug(
 		items_available,
 		counts[0],
@@ -27,21 +35,18 @@ func _ready():
 func _on_3_pressed():
 	var item = items_available[current_options[2]]
 	items_owned.append(item)
-	text += item.resource_name + "\n"
 	roll()
 
 
 func _on_2_pressed():
 	var item = items_available[current_options[1]]
 	items_owned.append(item)
-	text += item.resource_name + "\n"
 	roll()
 
 
 func _on_1_pressed():
 	var item = items_available[current_options[0]]
 	items_owned.append(item)
-	text += item.resource_name + "\n"
 	roll()
 
 
