@@ -13,8 +13,10 @@ Includes classes (each instantiated through `Class.new()` unless a Resource):
 #
 Made by Don Tnowe in 2022.
 
-https://redbladegames.netlify.app
+[My Website](https://redbladegames.netlify.app)
 
-https://twitter.com/don_tnowe
+[Itch](https://don-tnowe.itch.io)
+
+[Twitter](https://twitter.com/don_tnowe)
 
 Copying and Modification is allowed in accordance to the MIT license, full text is included.
