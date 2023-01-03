@@ -1,8 +1,8 @@
 extends Control
 
-export(Array, Texture) var symbol_textures := []
-export(Array, String) var symbol_chars := []
-export(Array, Resource) var dice := []
+@export var symbol_textures : Array[Texture] = []
+@export var symbol_chars : Array[String] = []
+@export var dice : Array[Resource] = []
 
 var symbol_nodes := []
 var rng := DiceArray.new()
@@ -14,7 +14,7 @@ func _ready():
 		for j in 4:
 			var new_node = line_edit.duplicate()
 			$"Center/Grid".add_child(new_node)
-			new_node.connect("text_changed", self, "_on_edit_cell", [j, i])
+			new_node.connect("text_changed", _on_edit_cell.bind(j, i))
 			new_node.text = dice[j].faces[i]
 
 	for i in 4:
@@ -52,4 +52,5 @@ func roll():
 		"C: " + str(rng.get_symbol_count("C"))
 		+ "\nM: " + str(rng.get_symbol_count("M"))
 		+ "\nY: " + str(rng.get_symbol_count("Y"))
+		+ "\nWild: " + str(rng.get_symbol_count("Wild"))
 	)

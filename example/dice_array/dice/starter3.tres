@@ -1,10 +1,10 @@
-[gd_resource type="Resource" load_steps=2 format=2]
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://iye1avdmdlm2"]
 
-[ext_resource path="res://addons/advanced_random/advanced_die.gd" type="Script" id=1]
+[ext_resource type="Script" path="res://addons/advanced_random/advanced_die.gd" id="1"]
 
 [resource]
-script = ExtResource( 1 )
+script = ExtResource("1")
 description = "A die with a bunch of Cs and Ys."
-faces = [ "C", "C", "C", "CY", "CY", "YYYY" ]
-symbol_char_if_number = "Y"
+faces = ["1", "2", "3", "4", "5", "6"]
 use_numbers_as_symbols = false
+symbol_char_if_number = "Y"

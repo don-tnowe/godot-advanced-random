@@ -1,9 +1,9 @@
 extends Control
 
-export var card_count := 24
-export var card_in_pile_separation := 24.0
+@export var card_count := 24
+@export var card_in_pile_separation := 24.0
 
-onready var original_card := $"Cards".get_child(0)
+@onready var original_card := $"Cards".get_child(0)
 
 var deck : CardDeck
 
@@ -17,11 +17,12 @@ func _ready():
 
 	deck = CardDeck.new(card_count)
 	# Just card_count is cool, but you can also pass more parameters.
+	# Read documentation for details.
 	# deck = CardDeck.new(
 	# 	card_count, RandomNumberGenerator.new(),
 	# 	CardDeck.PILE_DRAW, CardDeck.PILE_IN_PLAY, CardDeck.PILE_DISCARD
 	# 	)
-	deck.connect("draw_pile_emptied", self, "_on_draw_pile_emptied")
+	deck.connect("draw_pile_emptied", _on_draw_pile_emptied)
 	update_card_view()
 
 
@@ -30,8 +31,9 @@ func create_card_node(color) -> Node:
 	$"Cards".add_child(new_node)
 	_card_nodes.append(new_node)
 	new_node.self_modulate = color
-	new_node.get_node("ActualPressableButton").connect("pressed", self, "_on_card_pressed", [new_node.get_position_in_parent()])
-	new_node.get_node("Label").text = str(new_node.get_position_in_parent())
+	new_node.get_node("ActualPressableButton").connect("pressed", _on_card_pressed.bind(new_node.get_index()))
+	new_node.get_node("Label").text = str(new_node.get_index())
+	new_node.get_node("ActualPressableButton").tooltip_text = "Card " + str(new_node.get_index())
 	return new_node
 
 
@@ -46,18 +48,18 @@ func get_color_from_index(i : int, full_hue_count : int = 6) -> Color:
 func update_card_view():
 	for i in card_count:
 		if deck.get_card_pile_index(i) == CardDeck.PILE_DRAW:
-			_card_nodes[i].rect_global_position = (
-				$"PileDraw".rect_global_position
+			_card_nodes[i].global_position = (
+				$"PileDraw".global_position
 				+ Vector2(0, deck.get_card_position_in_pile(i) * card_in_pile_separation)
 			)
-			_card_nodes[i].raise()
+			raise_node(_card_nodes[i])
 
 		elif deck.get_card_pile_index(i) == CardDeck.PILE_DISCARD:
-			_card_nodes[i].rect_global_position = (
-				$"PileDiscard".rect_global_position
+			_card_nodes[i].global_position = (
+				$"PileDiscard".global_position
 				+ Vector2(0, deck.get_card_position_in_pile(i) * card_in_pile_separation)
 			)
-			_card_nodes[i].raise()
+			raise_node(_card_nodes[i])
 
 		# Hand card handling is different. We need to consider the order cards were drawn!
 		#
@@ -76,14 +78,14 @@ func update_card_view():
 	var queue := deck.get_pile_queue(CardDeck.PILE_IN_PLAY)
 	for i in queue.size():
 		var node = _card_nodes[queue[i]]
-		node.rect_global_position = (
-			$"Hand".rect_global_position
+		node.global_position = (
+			$"Hand".global_position
 			+ Vector2(
 				i * card_in_pile_separation
 				- queue.size() * card_in_pile_separation * 0.5, 0
 			)
 		)
-		node.raise()
+		raise_node(node)
 
 
 func _on_Draw_pressed():
@@ -94,7 +96,7 @@ func _on_Draw_pressed():
 
 	var drawn_card_node = _card_nodes[drawn_card_index]
 	# Do whatever with drawn_card_node and drawn_card_index
-	
+
 	# Add cards to the pile's queue so order is guaranteed.
 	deck.queue_card(drawn_card_index)
 	update_card_view()
@@ -107,7 +109,7 @@ func _on_card_pressed(card_index : int):
 		# If the card's not in the hand, you can't do anything with it.
 		return
 	
-	if !$"CheckBox".pressed:
+	if !$"CheckBox".button_pressed:
 		# Here goes whatever you're supposed to do with the card when you play it.
 		var node = _card_nodes[card_index]
 		$"Label2".text = "Card played!!! " + str(card_index) + " And its color is:::::" + str(node.self_modulate)
@@ -117,7 +119,7 @@ func _on_card_pressed(card_index : int):
 
 	else:
 		deck.queue_card(card_index, deck.pile_draw_from)
-		_card_nodes[card_index].raise()
+		raise_node(_card_nodes[card_index])
 
 	update_card_view()
 
@@ -133,8 +135,12 @@ func _on_draw_pile_emptied():
 func add_card():
 	deck.card_count += 1
 	card_count += 1
-	create_card_node(Color.white * randf() * 3)
+	create_card_node(Color.WHITE * randf() * 3)
 	update_card_view()
+
+# Apparently, Node.raise() is no longer a thing.
+func raise_node(node):
+	node.get_parent().move_child(node, 0)
 
 
 func _on_Create_pressed():

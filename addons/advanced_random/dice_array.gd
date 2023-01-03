@@ -1,14 +1,17 @@
 class_name DiceArray
-extends Reference
+extends RefCounted
 
+## Chucks a buch of dice and tallies up the numbers or symbols.
+
+## The [RandomNumberGenerator] used to determine dropped values.
 var rng : RandomNumberGenerator
 
 var _dice := []
 var _dice_faces_rolled := []
 var _dice_symbol_counts := {}
 
-# Create a DiceArray object. Optionally, pass a RandomNumberGenerator - if not, new one is created.
-# Set `dice` to configure which `AdvancedDie` are rolled at the start. You can reassign these later when calling `roll()`
+## Create a DiceArray object. Optionally, pass a [RandomNumberGenerator] - if not, new one is created.[br]
+## Set [code]dice[/code] to configure which [AdvancedDie] are rolled at the start. You can reassign these later when calling [method roll].
 func _init(random_number_generator : RandomNumberGenerator = null, dice : Array = []):
 	rng = random_number_generator
 	if !random_number_generator:
@@ -18,7 +21,7 @@ func _init(random_number_generator : RandomNumberGenerator = null, dice : Array 
 	if dice.size() > 0:
 		roll(dice)
 
-
+## Rolls the dice. Retrieve the results afterwards using other methods of the class.
 func roll(dice : Array = []):
 	if dice.size() > 0:
 		_dice = dice
@@ -29,29 +32,26 @@ func roll(dice : Array = []):
 		_dice_faces_rolled[i] = (rng.randi() if rng else randi()) % _dice[i].faces.size()
 		_dice[i].add_up_face_symbols(_dice_faces_rolled[i], _dice_symbol_counts)
 
-
+## Creates a Dictionary telling how many times each symbol was seen after a [method roll].
 func get_symbol_counts() -> Dictionary:
 	return _dice_symbol_counts.duplicate()
 
 
+## Tells how many times a symbol was seen after a [method roll].
 func get_symbol_count(of_symbol : String = "") -> int:
 	return _dice_symbol_counts.get(of_symbol, 0)
 
-
-func get_rolled_face_indices() -> Array:
+## Tells which die faces were pointing upwards after a [method roll], by index.
+func get_rolled_face_indices() -> Array[int]:
 	return _dice_faces_rolled.duplicate()
-			
 
-func get_rolled_faces() -> Array:
+## Tells which symbols were on each die's face after a [method roll].
+func get_rolled_faces() -> Array[Array]:
 	var arr = []
 	var face
 	arr.resize(_dice.size())
 	for i in _dice.size():
 		face = _dice[i].faces[_dice_faces_rolled[i]]
-		# if !_dice[i].use_numbers_as_symbols && face.is_valid_float():
-		# 	arr[i] = float(face) 
-
-		# else:
 		arr[i] = _dice[i].get_symbols_on_face(_dice_faces_rolled[i])
 
-	return arr			
+	return arr

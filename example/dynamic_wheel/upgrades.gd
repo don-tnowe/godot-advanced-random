@@ -1,9 +1,9 @@
 extends Label
 
-export(Array, Resource) var items_owned := []
-export(Array, Resource) var items_available := []
+@export var items_owned : Array[DynamicWheelItem] = []
+@export var items_available : Array[DynamicWheelItem] = []
 
-var current_options := [null, null, null]
+var current_options := [-1, -1, -1]
 var rng := FortuneWheel.new()
 
 
